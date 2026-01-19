@@ -1,0 +1,26 @@
+{
+  "name": "swiftui-dev",
+  "version": "1.0.0",
+  "description": "Comprehensive SwiftUI development toolkit for iOS 18+/macOS 15+ with modern Swift 6 patterns, SwiftData, Liquid Glass, simulator automation, and expert agents for architecture, design, and implementation.",
+  "author": {
+    "name": "Blake Crane",
+    "email": "jbcrane13@github.com"
+  },
+  "repository": "https://github.com/jbcrane13/swiftui-dev",
+  "license": "MIT",
+  "keywords": [
+    "swiftui",
+    "ios",
+    "macos",
+    "swift",
+    "swift6",
+    "xcode",
+    "swiftdata",
+    "liquid-glass",
+    "ios26",
+    "appium",
+    "xcuitest",
+    "cloudkit",
+    "observation"
+  ]
+}

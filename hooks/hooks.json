@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If this operation involves a Swift file (.swift), check the content for legacy patterns that violate modern iOS 18+/Swift 6 standards:\n\n**REJECT and request changes if you find:**\n- `ObservableObject` → Use `@Observable` instead\n- `@Published` → Properties are observed by default with @Observable\n- `@StateObject` → Use `@State` for reference types\n- `CoreData` or `NSManagedObject` → Use SwiftData with @Model\n- `DispatchQueue.main.async` → Use Swift Concurrency (async/await)\n- `NavigationView` → Use `NavigationStack`\n- Cross-actor data without `Sendable` conformance\n\nIf any legacy patterns are found, output a **STRONG WARNING** explaining what was found and the modern replacement. Do NOT block the operation, but clearly communicate the issue.\n\nIf the file is not Swift or contains no legacy patterns, allow the operation silently."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If this operation modified a SwiftUI view file (.swift containing `View` protocol conformance), check for accessibility identifier compliance:\n\n**Check that ALL interactive elements have `.accessibilityIdentifier()`:**\n- `Button` → needs identifier\n- `TextField` / `SecureField` → needs identifier\n- `Toggle` → needs identifier\n- `Picker` / `DatePicker` → needs identifier\n- `Slider` / `Stepper` → needs identifier\n- `Link` / `NavigationLink` → needs identifier\n- `List` / `ForEach` items → each cell needs identifier with unique ID\n- Screen containers → needs `screen_{name}` identifier\n\n**Naming convention:** `{screen}_{element}_{descriptor}`\nExamples: `login_button_submit`, `settings_toggle_notifications`, `home_cell_item_\\(item.id)`\n\nIf missing identifiers are found, output a **STRONG WARNING** listing the elements that need identifiers and suggested names. Do NOT block the operation.\n\nIf the file is not a SwiftUI view or all interactive elements have identifiers, allow silently."
+          }
+        ]
+      }
+    ]
+  }
+}
